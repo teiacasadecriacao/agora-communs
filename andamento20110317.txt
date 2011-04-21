@@ -1,0 +1,103 @@
+Deixei povoado para você poder refrescar a memória. abaixo está como apagar tudo rapidinho.
+
+alterei:
+votar.php
+comentarios.php
+deliberacoes.php
+rodape.php
+sobre.php
+
+Daniel. Por hora o que planejamos está assim: As pautas propostas
+podems ser promovias a pautas. As pautas ficam abertas para postagens, estas
+podem ser de um dos dois tipos: discussão/debate ou deliberação/encaminhamento.
+Qualquer postagem fica aberta para comentários e estes podem ser feitos
+também por usuários não credenciados (habilitados por usuários administradores).
+
+Em algum momento uma pauta deixa de estar aberta e é iniciada uma votação nas
+deliberações. Cada usuário pode votar uma única vez em cada deliberação.
+Pode-se ver quem votou a favor ou contra. Pode-se ainda postar comentários
+em quaisquer postagens, sejam deliberações ou não.
+
+Por fim, a pauta encerra o período de votações e então a pauta fica disponivel
+para consulta tanto dos conteúdos postados quanto das votações. Sempre é possível
+postar comentários às postagens, mesmo com a pauta encerrada.
+
+Esquema de expressão:
+Pauta - Postagem - Comentários.
+
+Esquema temporal de pautas:
+Pauta proposta - Pauta aberta para postagens - Pauta em votação - Pauta encerrada.
+
+
+
+MUDAR O ESTADO DA PAUTA
+(vamos programar isso direito depois, por hora o padrão está em 14 dias
+e a resolução é em dias)
+
+1) entre no mysql:
+$ mysql -hmysql12.teia.org.br -uteia12 -pfoobarman5 teia12
+(pode mandar este comando em qqr linux com mysql instalado. O
+mysql da teia parece estar aberto para qqr IP)
+
+2) Ache o número ((( id_pauta ))) da pauta que quer promover:
+leia a saída do seguinte comando
+> SELECT id_pauta, titulo, pauta FROM pautas;
+
+3) adiante a data de criação da pauta de acordo com o nivel
+que quer para a pauta. Em ordem de aparecimento:
+
+- Nivel de pauta em espera de votos para validação:
+> UPDATE pautas SET data_validacao=NULL,estado='0' WHERE id_pauta='numero__id_pauta__entre_aspas_simples';
+
+- Nivel de pauta aberta para postagens (menos de 14 dias após a validação):
+> UPDATE pautas SET data_validacao=CURDATE(),estado='-1' WHERE id_pauta='numero__id_pauta__entre_aspas_simples';
+
+-Nivel pauta fechada para votação nas deliberações (mais de 14 dias após a validação):
+> UPDATE pautas SET data_validacao=DATE(CURDATE()-16),estado='-1' WHERE id_pauta='numero__id_pauta__entre_aspas_simples';
+
+-Nivel pauta finalizada (mais de 28 dias após a validação):
+> UPDATE pautas SET data_validacao=DATE(CURDATE()-30),estado='-1' WHERE id_pauta='numero__id_pauta__entre_aspas_simples';
+
+_______________________________
+COMANDOS PARA APAGAR PAUTAS ZUADAS:
+(apaguei já as piores)
+
+1) entre no mysql:
+$ mysql -hmysql12.teia.org.br -uteia12 -pfoobarman5 teia12
+(pode mandar este comando em qqr linux com mysql instalado. O
+mysql da teia parece estar aberto para qqr IP)
+
+2) Ache o número ((( id_pauta ))) da pauta que quer apagar.
+leia a saída do seguinte comando
+> SELECT id_pauta, titulo, pauta FROM pautas;
+
+3) apague das tabelas todas os vestígios da pauta:
+> DELETE FROM pautas WHERE id_pauta='numero__id_pauta__entre_aspas_simples';
+> DELETE FROM postagens WHERE id_pauta='numero__id_pauta__entre_aspas_simples';
+> DELETE FROM comentarios WHERE id_pauta='numero__id_pauta__entre_aspas_simples';
+> DELETE FROM validacoes WHERE id_pauta='numero__id_pauta__entre_aspas_simples';
+> DELETE FROM votos WHERE id_pauta='numero__id_pauta__entre_aspas_simples';
+
+X) Caso queira apagar todos os registros do banco de dados (zerar a coisa):
+> DELETE FROM pautas;
+> DELETE FROM postagens;
+> DELETE FROM comentarios;
+> DELETE FROM validacoes;
+> DELETE FROM votos;
+
+____________________________
+COMANDOS PARA HABILITAR USUÁRIOS A POSTAREM
+(lembrando que usuários não credenciados podem postar comentários).
+1) entre no mysql:
+$ mysql -hmysql12.teia.org.br -uteia12 -pfoobarman5 teia12
+(pode mandar este comando em qqr linux com mysql instalado. O
+mysql da teia parece estar aberto para qqr IP)
+
+3) Dê privilégios para alguém.
+modelo:
+> UPDATE usuarios SET nivel='1' WHERE coluna='valor';
+exemplo:
+> update usuarios set nivel=1 where usuario='Raul';
+
+para dar privilegios para todos os usuários:
+> update usuarios set nivel=1;

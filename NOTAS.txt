@@ -1,0 +1,175 @@
+Tempos:
+2 semana para validar
+2 semanas para postagens
+2 semanas para votação
+
+Ad deliberações ssó são tidas como tal se o numero de votos
+a favor for maior que os votos contra. EMPATE empata a foda.
+
+o slide 8 eu condensei como sendo a própria página da pauta,
+com as postagens. Na implementação que está feita, ao votar ou consultar
+o "a favor" ou o "contra" aparece uma listinha de quem já votou ali.
+
+desta forma, o slide 9 também ficou no slide 7. Só não lidei com
+as pautas que foram propostas mas não validadas.
+
+não fiz o sistema de reconhecimento da pauta mais movimentada.
+
+A listinha de comentários aleatórios acabou ficando totalmente de lado.
+Na verdade isso é um pouco mais chato do que parece.
+Fiquei tentado a deixar, ao menos por hora, comentários aleatórios da pauta,
+independente se é da postagem mais movimentada ou não.
+Também achei válido utilizar o espaço destinado a estas postagens aleatórias
+para colocar, *também*, algumas linhas explicativas da própria página.
+
+Termino afirmando que o site está programado, mesmo que grosseiramente,
+e falta agora o layout, outra empreitada.
+
+Por hora os usuários credenciados são habilitados na unha no banco de dados,
+acho que será melhor eu criar uma página para permitir que outra pessoa faça isso.
+De qqr forma, se eu disponibilizar o comando correto, e a pessoa tiver cuidado,
+não tem erro.
+
+curti o nome Ágora Comuns. è um duplo trocadilho de ênfase prosódica.
+
+----------************---------------
+CRIAÇÃO DOS BANCOS DE DADOS
+
+create database agora_commons;
+
+1)
+usuarios (nome, email, usuario, instituicao, comentario, data)
+
+OBS: tamanho máximo do "usuário" 15 caracteres.
+
+o nivel por hora é booleano:
+0 para usuário qualquer
+1 para credenciado.
+
+CREATE TABLE usuarios(
+id_usuario int not null auto_increment, primary key(id_usuario),
+nome VARCHAR(60),
+email VARCHAR(60),
+instituicao VARCHAR(60),
+usuario VARCHAR(15),
+senha VARCHAR(30),
+comentario VARCHAR(300),
+data_cadastro DATE,
+nivel BOOL);
+
+2)
+pautas (id_autor, data_criacao, data_validacao, estado (proposta, atual, finalizada), pauta)
+
+OBS: O estado é:
+-1 para pautas atuais abertas para postagens, em regime de votação e finalizadas*
+[0,inf] para propostas de pauta, o número equivale ao número de votos para validação.
+
+* A distinção se dá através da contagem de tempo: até 14 dias após a validação a
+pauta fica aberta para postagem, aí fica em regime de votação até 24 dias
+após a validação e então conta como pauta finalizada.
+
+id_autor é o id_usuario de quem propos a pauta.
+
+CREATE TABLE pautas(
+id_pauta int not null auto_increment, primary key(id_pauta),
+id_autor int not null,
+data_criacao DATE,
+data_validacao DATE,
+estado TINYINT,
+titulo VARCHAR(60),
+pauta VARCHAR(1000));
+
+3)
+postagens (id_pauta, id_autor, data, tipo, postagem)
+
+OBS: O tipo de postagem é:
+0 para discussão/debate
+1 para deliberação/encaminhamento
+
+CREATE TABLE postagens(
+id_postagem int not null auto_increment, primary key(id_postagem),
+id_pauta int not null,
+id_autor int not null,
+data DATE,
+tipo BOOL,
+postagem VARCHAR(1000));
+
+4)
+comentarios (id_pauta, id_postagem, id_autor, data, comentario)
+
+OBS: a pauta mais movimentada deve ser referenciada através de uma
+soma ponderada entre o número de postagens e o número de comentários das
+postagens. (talvez usar ponderação uniforme)
+
+quando o comentário se refere à pauta ainda em aprovação, o id_postagem=0
+
+CREATE TABLE comentarios(
+id_comentario int not null auto_increment, primary key(id_comentario),
+id_pauta int not null,
+id_postagem int not null,
+id_autor int not null,
+data DATE,
+comentario VARCHAR(1000));
+
+5)
+votos (id_pauta, id_postagem, id_autor, data, voto)
+
+CREATE TABLE votos(
+id_voto int not null auto_increment, primary key(id_voto),
+id_pauta int not null,
+id_postagem int not null,
+id_autor int not null,
+data DATE,
+voto BOOL);
+
+6)
+validacoes (id_pauta, id_autor, data)
+
+CREATE TABLE validacoes(
+id_validacao int not null auto_increment, primary key(id_validacao),
+id_pauta int not null,
+id_autor int not null,
+data DATE);
+
+
+___________________________
+
+INSERT INTO `pautas` (`id_autor` ,`data_criacao`, `data_validacao`, `estado` ,`titulo` , `pauta`)
+                VALUES ('1',CURDATE(),CURDATE(),-1, 'A nova ministra é +-', 'sempre que olhamos para o horizonte, vemos a nova ministra com seu ardor querendo solavancar o ECAD para dentro de nós. O que faremos?');
+
+INSERT INTO `pautas` (`id_autor` ,`data_criacao`, `data_validacao`, `estado` ,`titulo` , `pauta`)
+                VALUES ('26',CURDATE(),CURDATE(),-1, 'Foi-se o tempo da carochinha', 'A carochinha é coisa de muito tempo atrás. Ok. Mas alguém sabe o que quer dizer a carochinha? Alguém entendfe de carochinha? Há interesse nisso? É o que proponho discutir nesta pauta.');
+
+INSERT INTO `pautas` (`id_autor` ,`data_criacao`, `data_validacao`, `estado` ,`titulo` , `pauta`)
+                VALUES ('26',CURDATE(),'NULL','0', 'TUm pa pum tá tum, assim que é nóis.', 'Um pelço éco no prego no meco. Danço frevo com você sabia? nem metia na tia nem mia a lia é pia a guia da gíria malúco, se liga.');
+
+INSERT INTO `postagens` (`id_pauta`, `id_autor`, `data`, `tipo`, `postagem`)
+        VALUES ('2', '27', CURDATE(),'1','Eu acho que devemos ir atrás de ficar com ela, tipo dar uns beijinhos talz pq ela ainda dá pro gasto.');
+
+INSERT INTO `postagens` (`id_pauta`, `id_autor`, `data`, `tipo`, `postagem`)
+        VALUES ('2', '26', CURDATE(),'1','Ah, esquece essa mina mew.');
+
+INSERT INTO `comentarios` (`id_pauta`, `id_postagem`, `id_autor`, `data`,`comentario`)
+        VALUES ('2','2','1',CURDATE(),'claro que você pode, assim como sempre será de bom grado.');
+
+INSERT INTO `comentarios` (`id_pauta`, `id_postagem`, `id_autor`, `data`,`comentario`)
+        VALUES ('2','2','27',CURDATE(),'ow tio, se liga mewwwwww!!!!!!!!!.');
+
+
+_____________________
+select distinct id_pauta from postagens;
+
+SELECT id_pauta FROM postagens GROUP BY id_pauta ORDER BY count(id_pauta) DESC;
+
+SELECT count(id_pauta), id_pauta
+FROM postagens
+GROUP BY id_pauta
+ORDER BY count(id_pauta);
+
+SELECT id_pauta
+FROM postagens c
+JOIN ( SELECT city, COUNT(*) cnt
+       FROM cities
+       GROUP BY city
+     ) c2 ON ( c2.city = c.city )
+ORDER BY c2.cnt DESC;

@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+body {background:black;padding:0}
+h1 {color:white}
+
+#coluna-comentarios {background:gray;width:22%;float:right;margin-top:90px; border:solid 2px DarkSlateGray;}
+#titulo-comentarios {font-size:100%;margin:3%;}
+#corpo-comentarios {background:SkyBlue;padding:3%;}
+.corpo-comentario {background:#ffff99; border:solid 2px gray; margin-bottom:3%;}
+
+
+.wrapper {width:60%;float:left}
+
+.pauta-atual {background:green;padding:10px;margin:10px;float:right;width:95%}
+.pauta-atual-conteudo{background:white;padding:5px;margin:5px}
+.pauta-atual-autor {float:right;font-size:20px}
+.pauta-atual-titulo {font-size:20px}
+
+.postagem-atual {background:gray;padding:10px;margin:10px;float:right;width:95%}
+.proposta-pauta-conteudo{background:Green  ;padding:5px;margin:5px;border:solid 2px black}
+/* PaleGreen   */
+.lista-menu{list-style:none;float:left;margin:0}
+.lista-menu li{margin-top:100px;margin-left:0}
+
+

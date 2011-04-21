@@ -1,3 +1,8 @@
+<!--
+DOMÍNIO PÚBLICO
+PUBLIC DOMAIN
+-->
+
 <?php
 require("cabecalho.php");
 if(isset($_POST[adicionar]))

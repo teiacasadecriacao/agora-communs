@@ -1,3 +1,8 @@
+<!--
+DOMÍNIO PÚBLICO
+PUBLIC DOMAIN
+-->
+
 <?php
 $pressed=-1;
 require("cabecalho.php");

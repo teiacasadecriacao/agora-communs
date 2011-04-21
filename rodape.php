@@ -1,3 +1,8 @@
+<!--
+DOMÍNIO PÚBLICO
+PUBLIC DOMAIN
+-->
+
 <div style="text-align:center;margin-bottom:20px;">
     <a href="sobre.php" style="color:red;font-size:12px;text-decoration:none;">
         /\/\/\/\/-------/\/\/\/\/ h4csw4r3 de delibera&ccedil;&atilde;o _o_o_ oOo _o_o_ | /\/\/\/\/-------/\/\/\/\/ h4csw4r3 de delibera&ccedil;&atilde;o _o_o_ oOo _o_o_

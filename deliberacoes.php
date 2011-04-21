@@ -1,3 +1,8 @@
+<!--
+DOMÍNIO PÚBLICO
+PUBLIC DOMAIN
+-->
+
 <!-- Para onde vai este link de ver detalhes? Que conteúdo será disposto nele? -->
 <?php
 $pressed=3;

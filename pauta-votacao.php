@@ -1,3 +1,8 @@
+<!--
+DOMÍNIO PÚBLICO
+PUBLIC DOMAIN
+-->
+
 <!-- como esta página será acessada? -->
 <!-- a quais deliberações se referem os comentários à direita? -->
 <!-- Como os comentários das deliberações será acessados já que o espaço está tomado pelos botões para votação? -->

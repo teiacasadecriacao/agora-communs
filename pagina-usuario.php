@@ -1,3 +1,8 @@
+<!--
+DOMÍNIO PÚBLICO
+PUBLIC DOMAIN
+-->
+
 <!-- FALTA INCLUIR AQUI DADOS DAS PAUTAS, POSTAGENS E COMENTÁRIOS DO USUÁRIO -->
 <?php
 require("cabecalho.php");

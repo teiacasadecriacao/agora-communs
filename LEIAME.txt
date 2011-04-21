@@ -1,0 +1,21 @@
+SOFTWARE EM DOMÍNIO PÚBLICO
+PUBLIC DOMAIN SOFTWARE
+
+******************
+
+em NOTAS.txt estão detalhes de funcionamento da ferramenta e de
+criação dos bancos de dados.
+
+em andamento20110317.txt está uma breve descrição da interação do usuário
+final. Este documento também descreve como proceder a administrar, que,
+por hora, é mysql via linha de comando.
+
+em sobre.php há alguma informação adicional.
+
+todo o programa é disponibilizado em domínio público
+
+entre em contato:
+agora PONTO communs (NO NO NO NO) teia PONTO org PONTO br
+
+
+/\/\/\/\/\ _o_o_ oOo _o_o_ /\/\/\/\/\

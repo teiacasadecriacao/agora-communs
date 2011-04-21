@@ -1,6 +1,7 @@
 <!--
-DOMÍNIO PÚBLICO
-PUBLIC DOMAIN
+_o_o_ oOo _o_o_, 2011
+Domínio público
+Public domain.
 -->
 
 <!-- Este ver na íntegra é para ver a pauta no seu formato original, certo? -->

@@ -1,6 +1,7 @@
 <!--
-DOMÍNIO PÚBLICO
-PUBLIC DOMAIN
+_o_o_ oOo _o_o_, 2011
+Domínio público
+Public domain.
 -->
 
 <!-- COLOCAR FUNCIONALIDADE PARA INSERIR NOVO COMENTÁRIO AQUI NESTA PÁGINA -->

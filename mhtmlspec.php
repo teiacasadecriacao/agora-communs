@@ -1,6 +1,7 @@
 <!--
-DOMÍNIO PÚBLICO
-PUBLIC DOMAIN
+_o_o_ oOo _o_o_, 2011
+Domínio público
+Public domain.
 -->
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

@@ -1,6 +1,7 @@
 <!--
-DOMÍNIO PÚBLICO
-PUBLIC DOMAIN
+_o_o_ oOo _o_o_, 2011
+Domínio público
+Public domain.
 -->
 
 <!-- Para onde vai este link de ver detalhes? Que conteúdo será disposto nele? -->

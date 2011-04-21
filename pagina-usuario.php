@@ -1,6 +1,7 @@
 <!--
-DOMÍNIO PÚBLICO
-PUBLIC DOMAIN
+_o_o_ oOo _o_o_, 2011
+Domínio público
+Public domain.
 -->
 
 <!-- FALTA INCLUIR AQUI DADOS DAS PAUTAS, POSTAGENS E COMENTÁRIOS DO USUÁRIO -->
